@@ -1,0 +1,23 @@
+1. Slice operation 
+-> select prod_name, total_sales
+   from fact_sales
+   inner join product_dwm
+   on fact_sales.prod_id=product_dum.prod_id
+   where prod_name='rice';
+
+2. Dice Operation
+   select prod_name, fact_sales.total_sales
+   from((product_dwm inner join fact_sales on product.dwm.prod_id=fact_sales.prod_id) join time_dwm on fact_sales.time_id=time_dwm.time)
+   where prod_name='rice' and qt = 'qt';
+   
+3. Roll up operation 
+   select yr,sum(total_sales)
+   from(fact_sales natural join product_dwm)
+   join time_dwm on fact_sales.time_id=time_dwm.time_id
+   where prod_name='rice' group by yr;
+
+4. Drill down operation
+   select qt, sum (total_sales)
+   from (fact_sales natural join product_dwm)
+   join time_dwm on fact_sales.time_id = time_id
+   where prod_name-'rice' group by qt; 
